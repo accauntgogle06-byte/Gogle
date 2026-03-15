@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.card{
+background:white;
+padding:40px;
+width:300px;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#4285F4;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2d6cdf;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Login</h2>
+
+<input id="email" type="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAnIw2P6RzSzY3nYkwqFSnRYxcn4fFS4Lw",
+  authDomain: "gogle-projek.firebaseapp.com",
+  projectId: "gogle-projek",
+  storageBucket: "gogle-projek.firebasestorage.app",
+  messagingSenderId: "703683694426",
+  appId: "1:703683694426:web:e5353f47ac5761498bad63"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.login = async function(){
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+await addDoc(collection(db,"users"),{
+email: email,
+password: password
+});
+
+alert("Success");
+
+}
+
+</script>
+
+</body>
+</html>
